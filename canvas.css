@@ -1,0 +1,14 @@
+.background {
+  background: black;
+  z-index: 1;
+}
+
+.area {
+  z-index: 2;
+}
+
+canvas {
+  top: 0;
+  left: 0;
+  position: absolute;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Canvas Listener</title>
+    <link rel="stylesheet" href="canvas.css">
+  </head>
+  <body>
+    <canvas id="background" class="background" width="640" height="480"></canvas>
+    <canvas id="area" class="area" width="640" height="480"></canvas>
+
+    <script src="app.js"></script>
+
+    <script type="text/javascript">
+
+      renderizer.select('area');
+      renderizer.add({
+        x1: 10,
+        y1: 10,
+        x2: 20,
+        y2: 20,
+        color: '#F00'
+      });
+      renderizer.start();
+
+    </script>
+
+  </body>
+</html>
