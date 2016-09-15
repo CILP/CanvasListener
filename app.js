@@ -2,13 +2,14 @@ var renderizer = (function(){
 
   var context;
   var squares = [];
+  var circles = [];
 
   function selectCanvas(id){
 
     var canvas = document.getElementById(id);
     context = canvas.getContext('2d');
 
-    canvas.addEventListener("mousemove", function(e){
+    canvas.addEventListener('mousemove', function(e){
 
       var x = e.offsetX,
           y = e.offsetY;
@@ -22,6 +23,19 @@ var renderizer = (function(){
           s.color = '#F00';
         }
       });
+
+      circles.forEach(function(c){
+
+        var dx = x - c.x
+        var dy = y - c.y
+        
+        if ((dx * dx + dy * dy) <= c.r * c.r){
+          c.color = '#0F0';
+        } else {
+          c.color = '#F00';
+        }
+
+      });
     });
 
     canvas = null;
@@ -30,16 +44,30 @@ var renderizer = (function(){
   function repaint(){
     window.requestAnimationFrame(repaint);
 
-    // drawBackGround();
     cleanCanvas();
 
     squares.forEach(function(s){
       drawRect(s);
     });
+
+    circles.forEach(function(c){
+      drawCircle(c);
+    });
+
   }
 
   function addRect(rect){
     squares.push(rect);
+  }
+
+  function addCircle(cir){
+    circles.push(cir);
+  }
+
+  function drawCircle(cir){
+    context.fillStyle = cir.color;
+    context.arc(cir.x, cir.y, cir.r, 0, 2 * Math.PI, false);
+    context.fill();
   }
 
   function init(){
@@ -66,7 +94,8 @@ var renderizer = (function(){
 
   return {
     select: selectCanvas,
-    add: addRect,
+    addSquare: addRect,
+    addCircle: addCircle,
     start: init
   };
 
